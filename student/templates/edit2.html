@@ -1,6 +1,7 @@
 {% extends 'menu.html' %}
-{% block edit %}
-{% block title %}<title>Update </title> {% endblock %}
+{% block edit2 %}
+{% block title %}  <title>  Update  </title>{% endblock %}
+
 <style type="text/css">
 	input{
 		border:solid red 2px;
@@ -22,7 +23,7 @@
 	<br>
 	<div class="container">
 		{% for i in userdetail %}
-	<form action="/editdata?email={{i.username}}" method="POST">
+	<form action="/editdata" method="POST">
 		{% endfor %}
 		{% for i in edits %}
 		<table align="center" style="border: 2px solid yellow; border-radius:100px;">

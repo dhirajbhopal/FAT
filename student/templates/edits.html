@@ -1,6 +1,7 @@
 {% extends 'menu.html' %}
-{% block edit2 %}
-{% block title %}<title> Edit </title> {% endblock %}
+{% load static %}
+{% block edit %}
+{% block title %}  <title>  Edit  </title>{% endblock %}
 <style type="text/css">
 	input{
 		border:solid red 2px;
@@ -21,9 +22,7 @@
 <body>
 	<br>
 	<div class="container">
-		{% for i in userdetail %}
-	<form action="/editdata?email={{i.username}}" method="GET">
-		{% endfor %}
+	<form action="/editdata" method="GET">
 		<table id="generatePdf" align="center" style="border: 2px solid yellow; border-radius:50px;">
 			<tr>
 			<td>Emp. ID</td>

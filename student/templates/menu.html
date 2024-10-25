@@ -1,3 +1,4 @@
+{% block default %}
 {% load static %}
 <html lang="en">
   <head>
@@ -16,39 +17,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://fbktnsetnet.000webhostapp.com/wp-content/uploads/2018/04/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>     
-   {% block title %}  {% endblock %}
-   <title> Home </title> 
+   
+  {% block title %} <title>  Home  </title> {% endblock %}
   </head>
   <body style="margin: 0;">
  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-  {% for i in userdetail %}
-  <form action="/all?email={{i.username}}" method="POST">
+  <form action="/all" method="POST">
   <a><input type="submit" name="" value="FAT Site"></a> </form>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/insert?email={{i.username}}">Generate New FAT</a>
-      <a class="nav-item nav-link" href="/edit?email={{i.username}}">Edit</a>
-      <a class="nav-item nav-link" href="/insertqr?email={{i.username}}">Insert QR</a>
-      <a class="nav-item nav-link" href="/newphoto?email={{i.username}}">Update Photo</a>
-      <a class="nav-item nav-link" href="/upload?email={{i.username}}">Upload Pending</a>
-      <a class="nav-item nav-link" href="/donate?email={{i.username}}">Donate</a> 
+      <a class="nav-item nav-link" href="/insert">Generate New FAT</a>
+      <a class="nav-item nav-link" href="/edit">Edit</a>
+      <a class="nav-item nav-link" href="/insertqr">Insert QR</a>
+      <a class="nav-item nav-link" href="/newphoto">Update Photo</a>
+      <a class="nav-item nav-link" href="/upload">Upload Pending</a>
+      <a class="nav-item nav-link" href="/donate">Donate</a> 
       <a style="margin-left: 450px; color: green;" class="nav-item nav-link">{{i.username}}</a>
-      <a style="color: red;" class="nav-item nav-link" href="/logout_view">Logout</a>
-     {% endfor %}
+    
     </div>
   </div>
 </nav>
-<body>
 {% block home %} {% endblock %}
 {% block edit %} {% endblock %}
-{% block edit2 %}{% endblock %}
-{% block insert %}{% endblock %}
+{% block edit2 %} {% endblock %}
+{% block insert %} {% endblock %}
 {% block print %} {% endblock %}
 {% block updatephoto %} {% endblock %}
-{% block qrupdate %}{% endblock %}
+{% block qrupdate %} {% endblock %}
 {% block upload %} {% endblock %}
 </body>
 </html>
+{% endblock %}

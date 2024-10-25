@@ -34,115 +34,32 @@ from django.contrib.auth import logout
 from django.core.cache import cache
 
 
-"""def insert(req):
-    email=req.GET.get("email")
-    passs=req.GET.get("password")
-    user = authenticate(req, username=email, password=passs)
-    if user is not None:
-        userdetail=User.objects.filter(username=email)
-        fatall=fat.objects.all()
-        return render(req,'insert.html',{'userdetail':userdetail,'fatall':fatall,'passs':passs})
-    else:
-        messages.error(req,'Invalid Username Or Password')
-        return redirect('/')
-    return redirect('/')"""
 
 def insert(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            fatall=fat.objects.all()
-            return render(req,'insert.html',{'userdetail':userdetail,'fatall':fatall})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
+    return render(req,'insert.html')
 
 def donate(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            return render(req,'donate.html',{'userdetail':userdetail})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
-
+    return render(req,'donate.html')
+        
 def logins(request):
-    return render(request,'login.html')
+    return render(request,'menu.html')
 
 def edit(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            return render(req,'edits.html',{'userdetail':userdetail})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
+    return render(req,'edits.html')
 
 def all(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            fatall=fat.objects.all()
-            return render(req,'fatall.html',{'userdetail':userdetail,'fatall':fatall})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
+    fatall=fat.objects.all()
+    return render(req,'fatall.html')
 
 def insertqr(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            return render(req,'qrupdate.html',{'userdetail':userdetail})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
+    return render(req,'qrupdate.html')
 
 def newphoto(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            return render(req,'updatephoto.html',{'userdetail':userdetail})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
-
+    return render(req,'updatephoto.html')
+        
 def upload(req):
-    email=req.GET.get("email")
-    userdetail=User.objects.filter(username=email)
-    for i in userdetail:
-        emailid=i.username
-        if (email==emailid):
-            userdetail=User.objects.filter(username=email)
-            fatdata=fat.objects.filter(status="raw")
-            return render(req,'upload.html',{'userdetail':userdetail,'fatdata':fatdata})
-        else:
-            messages.error(req,'You are not Loggedin')
-            return redirect('/')
-    return redirect('/')
+   return render(req,'upload.html')
+        
 
 def empfatdata(request):
     ob=fat()
@@ -195,36 +112,6 @@ def editdata(request):
         return HttpResponse("Data Saved")
     return redirect('/')
 
-"""def editdata(request):
-    if request.method=="GET":
-        email=request.GET.get("email")
-        empid=request.GET.get("empid")
-        userdetail=User.objects.filter(username=email)
-        for i in userdetail:
-            emailid=i.username
-            if (email==emailid):
-                edits=fat.objects.get(empid=empid)
-                edits=fat.objects.filter(empid=empid)
-                userdetail=User.objects.filter(username=email)
-                return render(request,'edit2.html',{'edits':edits,'userdetail':userdetail})
-            else:
-                messages.error(req,'You are not Loggedin')
-                return redirect('/')
-    else:
-        empid=request.GET.get("empid")
-        edits2=fat.objects.get(empid=empid)
-        edits2.name=request.POST.get("name")
-        edits2.dept=request.POST.get("dept")
-        edits2.circle=request.POST.get("circle")
-        edits2.location=request.POST.get("location")
-        edits2.grade=request.POST.get("grade")
-        edits2.date=request.POST.get("date")
-        edits2.certno=request.POST.get("certno")
-        edits2.status="raw"
-        edits2.save()
-        return HttpResponse("Data Saved")
-    return redirect('/')"""
-
 
 
 def printfat(request):
@@ -244,26 +131,6 @@ def printfat(request):
     context['qr_image_base64'] = qr_image_base64
     context['variable'] = qr_text
     return render(request,'print.html',{'printdone':printdone, 'qr_image_base64':qr_image_base64})
-
-
-"""def printfat(request):
-    context = {}
-    empid=request.GET.get("empid")
-    printdone=fat.objects.get(empid=empid)
-    printdone=fat.objects.filter(empid=empid)
-    for i in printdone:
-        link=i.qrlink
-    qr_text = link
-    qr_image = qrcode.make(qr_text, box_size=10)
-    qr_image_pil = qr_image.get_image()
-    stream = BytesIO()
-    qr_image_pil.save(stream, format='PNG')
-    qr_image_data = stream.getvalue()
-    qr_image_base64 = base64.b64encode(qr_image_data).decode('utf-8')
-    context['qr_image_base64'] = qr_image_base64
-    context['variable'] = qr_text
-    userdetail=User.objects.filter(username=email)
-    return render(request,'print.html',{'printdone':printdone,'userdetail':userdetail, 'qr_image_base64':qr_image_base64})"""
 
 
 
@@ -286,13 +153,10 @@ def donationdetail(request):
         qr_image_base64 = base64.b64encode(qr_image_data).decode('utf-8')
         context['qr_image_base64'] = qr_image_base64
         context['variable'] = qr_text
-        userdetail=User.objects.filter(username=emailid)
         don.save()
-        return render(request,'donationqr.html',{'qr_image_base64':qr_image_base64,'userdetail':userdetail})
+        return render(request,'donationqr.html',{'qr_image_base64':qr_image_base64,})
     else:
-        emailid=request.GET.get("emailid")
-        userdetail=User.objects.filter(username=emailid)
-        return render(request,'donate.html',{'userdetail':userdetail})
+        return render(request,'donate.html')
 
 
 def logintask(req):
