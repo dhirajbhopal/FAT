@@ -22,9 +22,7 @@
 <body>
 	<br>
 	<div class="container">
-		{% for i in userdetail %}
-	<form action="/donationdetail?emailid={{i.username}}" method="POST"> 
-		{% endfor %}
+	<form action="/donationdetail" method="POST"> 
 		<table id="generatePdf" align="center" style="border: 5px solid black;" class="rounded rounded-2">
 			<tr>
 			<td colspan="3" style="color:green;">Please fill detail for your identification </td>
