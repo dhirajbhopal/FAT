@@ -20,8 +20,6 @@
 <body>
 	<br>
 	<div class="container">
-	<button id="pdfButton">Generate PDF</button>
-      <div id="generatePdf">
 	<form action="empfatdata" method="POST" enctype="multipart/form-data">
 		<table id="generatePdf" align="center" style="border: 2px solid yellow; border-radius:50px;">
 			<tr>
@@ -83,15 +81,4 @@
 	</table>
 </form>
 </div>
-</div>
-<script>
-      var button = document.getElementById("pdfButton");
-      button.addEventListener("click", function () {
-         var doc = new jsPDF("p", "mm", [600, 400]);
-         var makePDF = document.querySelector("#generatePdf");
-         // fromHTML Method
-         doc.fromHTML(makePDF);
-         doc.save("output.pdf");
-      });
-   </script>
 {% endblock %}

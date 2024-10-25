@@ -49,7 +49,7 @@ def edit(req):
 
 def all(req):
     fatall=fat.objects.all()
-    return render(req,'fatall.html')
+    return render(req,'fatall.html',{'fatall':fatall})
 
 def insertqr(req):
     return render(req,'qrupdate.html')
