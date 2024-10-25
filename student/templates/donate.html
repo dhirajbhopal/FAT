@@ -1,0 +1,55 @@
+{% extends 'menu.html' %}
+{% block edit2 %}
+{% block title %}<title> Donate </title> {% endblock %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+
+<body>
+	<br>
+	<div class="container">
+		{% for i in userdetail %}
+	<form action="/donationdetail?emailid={{i.username}}" method="POST"> 
+		{% endfor %}
+		<table id="generatePdf" align="center" style="border: 5px solid black;" class="rounded rounded-2">
+			<tr>
+			<td colspan="3" style="color:green;">Please fill detail for your identification </td>
+
+	</tr>
+			<tr>
+			<td>Name</td>
+		<td><input type="text" name="name"></td>
+	</tr>
+	<tr>
+			<td>Email Id</td>
+		<td><input type="text" name="email"></td>
+	</tr>
+	<tr>
+			<td>Mobile No</td>
+		<td><input type="text" name="mobile"></td>
+	</tr>
+	<tr>
+			<td>Amount in Rs.</td>
+		<td><input type="text" value="1000" name="amount"></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><input style="margin-left: 50px;" type="submit" value="Pay Now"></td>
+	</tr>
+	</table>
+</form>
+</div>
+{% endblock %}

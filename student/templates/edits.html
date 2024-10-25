@@ -1,0 +1,38 @@
+{% extends 'menu.html' %}
+{% block edit2 %}
+{% block title %}<title> Edit </title> {% endblock %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+<body>
+	<br>
+	<div class="container">
+		{% for i in userdetail %}
+	<form action="/editdata?email={{i.username}}" method="GET">
+		{% endfor %}
+		<table id="generatePdf" align="center" style="border: 2px solid yellow; border-radius:50px;">
+			<tr>
+			<td>Emp. ID</td>
+		<td><input type="text" id="idid" name="empid"></td>
+	</tr>
+	<tr>
+		<td colspan="" align="center"><input style="margin-left: 50px;" type="submit" value="Check"></td>
+	</tr>
+	</table>
+</form>
+</div>
+{% endblock %}

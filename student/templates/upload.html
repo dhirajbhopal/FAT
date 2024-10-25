@@ -1,0 +1,66 @@
+{% extends 'menu.html' %}
+{% load static %}
+{% block upload %}
+    {% for i in fatdata %}
+  
+    <div id=data class="container-fluid" style="background-image: url(static/blankfat1200new.jpeg); background-repeat: no-repeat; background-position:center;">
+    <div class="container overflow-hidden text-left"> 
+  <div class="row gx-5">
+    <div class="col-2">
+      <br><br><br><br><br><br><br><br><br>
+    <input type="text" value="{{i.name}}" style="background:transparent; color:#323332; margin-left: 225px; width: 250px; border: 0px solid;font-weight: bolder;margin-top:80px; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br>
+    <input type="text" value="{{i.empid}}" style=" background: transparent; color:#323332; margin-left: 230px; border: 0px solid;font-weight: bolder;margin-top:4px; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br><br><br>
+  
+    <input type="text" value="{{i.dept}}" style="border: 0px solid;  color:#323332; background: transparent; margin-left: 225px; font-weight: bolder; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br>
+    
+    <input type="text" value="{{i.circle}}" style="background: transparent;  color:#323332; margin-left: 250px; margin-top: 2px; border: 0px solid;font-weight: bolder; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br><br><br><br>
+    <input type="text" value="{{i.grade}}" style="margin-left:155px;  color:#323332; margin-top: 10px; background: transparent; border: 0px solid;font-weight: bolder; font-size: 20px; font-family:Bodoni72Oldstyle;">
+  </div>
+    <div class="col">
+      <br><br><br><br><br><br><br><br><br><br><br>
+      <div style="margin-left:710px; margin-top:78px;"><img src="{{i.image}}" height="92px" width="90px"></div>
+    </div>
+  </div>
+</div>
+<div class="container px-4 text-left">
+  <div class="row gx-5">
+    <div class="col-2">
+      <br>
+     <div class=""><input type="text" value="{{i.location}}" style="margin-left:175px;  color:#323332; background: transparent; width: 90px; border: 0px solid;font-weight: bolder;margin-top:3px;  font-size: 20px; font-family:Bodoni72Oldstyle;">
+      <br><br>
+    <input type="text" value="{{i.certno}}" style=" margin-top:5px; background: transparent;  margin-left: 255px; border: 0px solid;font-weight: bolder;  color:#323332; margin-top: 6px; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br><br><br><br><br><br><br></div>
+    </div>
+    <div class="col-2 p-0" style="margin-left:185px; margin-top:10px">
+      <div ><img src="{% static 'blankQR.png' %}" height="85px"> 
+      </div>
+    </div>
+    <div class="col">
+      <br>
+      <div class=""><input type="text" value="{{i.date}}" style="background: transparent;  color:#323332; margin-left:47px;border: 0px solid;font-weight: bolder; font-size: 20px; margin-top:3px; font-family:Bodoni72Oldstyle;"></div>
+    </div>
+  </div>
+</div>
+</div>
+<button onclick="downloadimage()" style="margin-left:200px;">Download</button>
+<div class="pagebreak"> </div>
+<script type="text/javascript">
+ function downloadimage() {
+                /*var container = document.getElementById("image-wrap");*/ /*specific element on page*/
+                let container = document.getElementById('data')
+                html2canvas(container, { allowTaint: true }).then(function (canvas) {
+                    var link = document.createElement("a");
+                    document.body.appendChild(link);
+                    link.download = "{{i.name}}"+"_"+"{{i.date}}"+".jpg";
+                    link.href = canvas.toDataURL();
+                    link.target = '_blank';
+                    link.click();
+                });
+            }
+</script>
+{% endfor %}
+{% endblock %}

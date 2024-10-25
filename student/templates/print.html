@@ -1,0 +1,108 @@
+{% extends 'menu.html' %}
+{% block print %}
+{% block title %}<title> Print </title> {% endblock %}
+    {% for i in printdone %}
+    <div id="data" class="container-fluid" style="background-image: url(static/blankfat1200new.jpeg); background-repeat: no-repeat; background-position:center;">
+    <div class="container overflow-hidden text-left"> 
+  <div class="row gx-5">
+    <div class="col-2">
+      <br><br><br><br><br><br><br><br><br>
+    <input type="text" value="{{i.name}}" style="background:transparent; color:#323332; margin-left: 225px; width: 250px; border: 0px solid;font-weight: bolder;margin-top:80px; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br>
+    <input type="text" value="{{i.empid}}" style=" background: transparent; color:#323332; margin-left: 230px; border: 0px solid;font-weight: bolder;margin-top:4px; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br><br><br>
+  
+    <input type="text" value="{{i.dept}}" style="border: 0px solid;  color:#323332; background: transparent; margin-left: 225px; font-weight: bolder; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br>
+    
+    <input type="text" value="{{i.circle}}" style="background: transparent;  color:#323332; margin-left: 250px; margin-top: 2px; border: 0px solid;font-weight: bolder; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br><br><br><br>
+    <input type="text" value="{{i.grade}}" style="margin-left:155px;  color:#323332; margin-top: 10px; background: transparent; border: 0px solid;font-weight: bolder; font-size: 20px; font-family:Bodoni72Oldstyle;">
+  </div>
+    <div class="col">
+      <br><br><br><br><br><br><br><br><br><br><br>
+      <div style="margin-left:710px; margin-top:78px;"><img src="{{i.image}}" height="92px" width="90px"></div>
+    </div>
+  </div>
+</div>
+<div class="container px-4 text-left">
+  <div class="row gx-5">
+    <div class="col-2">
+      <br>
+     <div class=""><input type="text" value="{{i.location}}" style="margin-left:175px;  color:#323332; background: transparent; width: 90px; border: 0px solid;font-weight: bolder;margin-top:3px;  font-size: 20px; font-family:Bodoni72Oldstyle;">
+      <br><br>
+    <input type="text" value="{{i.certno}}" style=" margin-top:5px; background: transparent;  margin-left: 255px; border: 0px solid;font-weight: bolder;  color:#323332; margin-top: 6px; font-size: 20px; font-family:Bodoni72Oldstyle;">
+    <br><br><br><br><br><br><br></div>
+    </div>
+    <div class="col-2 p-0" style="margin-left:180px; margin-top:5px">
+      <div >
+        {% endfor %}
+        {% if qr_image_base64 %}
+        <img src="data:image/png;base64,{{ qr_image_base64 }}" height="90px"> 
+        {% endif %}
+        {% for i in printdone %}
+      </div>
+    </div>
+    <div class="col">
+      <br>
+      <div class=""><input type="text" value="{{i.date}}" style="background: transparent;  color:#323332; margin-left:52px;border: 0px solid;font-weight: bolder; font-size: 20px; margin-top:3px; font-family:Bodoni72Oldstyle;"></div>
+    </div>
+  </div>
+</div>
+</div>
+{% endfor %}
+<input id="btn-Preview-Image" type="button" value="Preview"/>
+    <a id="btn-Convert-Html2Image" href="#">Download Image</a>
+    <button onclick="generatePDF()">Download PDF</button>
+    <br/>
+    <h3>Preview :</h3>
+    <div id="previewImage">
+
+</body>
+
+<script type="text/javascript">
+function generatePDF(){
+    var div = document.querySelector('#data')
+    var imgData
+    html2canvas(div,{
+        useCORS:true,
+        onrendered:function(canvas){
+            imgData = canvas.toDataURL('image/png')
+            var doc = new jsPDF('l','pt','a3')
+            doc.addImage(imgData,'PNG',1,0)
+            {% for i in printdone %}
+            doc.save("{{i.name}}"+"_FAT")
+            {% endfor %}
+            window.open(imgData)
+        }
+    });
+   }
+</script>
+<script>
+$(document).ready(function(){
+
+  
+var element = $("#data"); // global variable
+var getCanvas; // global variable
+ 
+    $("#btn-Preview-Image").on('click', function () {
+         html2canvas(element, {
+         onrendered: function (canvas) {
+                $("#previewImage").append(canvas);
+                getCanvas = canvas;
+             }
+         });
+    });
+
+  $("#btn-Convert-Html2Image").on('click', function () {
+    var imgageData = getCanvas.toDataURL("image/png");
+    // Now browser starts downloading it instead of just showing it
+    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    {% for i in printdone %}
+    $("#btn-Convert-Html2Image").attr("download", "{{i.name}}"+"_FAT"+".jpeg").attr("href", newData);
+    {% endfor %}
+  });
+
+});
+</script>
+{% endblock %}

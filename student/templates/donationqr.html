@@ -1,0 +1,69 @@
+{% extends 'menu.html' %}
+{% block edit2 %}
+{% block title %}<title> DonateQR </title> {% endblock %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+<body>
+	<br>
+	<div class="container">
+		<table id="generatePdf" align="center" style="border: 5px solid black;">
+			<tr>
+			<td colspan="3" style="color:green;">Please fill detail for your identification </td>
+	</tr>
+			<tr>
+			<td>Name</td>
+		<td><input type="text" disabled name="name"></td>
+	</tr>
+	<tr>
+			<td>Email Id</td>
+		<td><input type="text" disabled name="email"></td>
+	</tr>
+	<tr>
+			<td>Mobile No</td>
+		<td><input type="text" disabled name="mobile"></td>
+	</tr>
+	<tr>
+			<td>Amount in Rs.</td>
+		<td><input type="text" disabled name="amount"></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><button  disabled style="margin-left: 50px;"> Pay Now </button></td>
+	</tr>
+	</table>
+</div>
+<div>
+		<table align="center">
+			<tr align="center"><td>
+        {% if qr_image_base64 %}
+        <img src="data:image/png;base64,{{qr_image_base64 }}" height="200px"> 
+        {% endif %}
+    </td>
+        </tr>
+        <tr><td>
+        <span style="color:green; size: 100px;"> Scan this QR Code with any UPI App and Pay</span></td></tr>
+       {% for i in userdetail %}
+	<form action="/donationdetail?emailid={{i.username}}" method="GET"> 
+		{% endfor %}
+        	<tr>
+        		<td align="center"><br>
+        <button style="color:red;">Pay Again</button> </td>
+    </form>
+    </tr>
+    </table>
+    </div>
+{% endblock %}

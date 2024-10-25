@@ -1,0 +1,78 @@
+{% extends 'menu.html' %}
+{% block edit %}
+{% block title %}<title>Update </title> {% endblock %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+<body>
+	<br>
+	<div class="container">
+		{% for i in userdetail %}
+	<form action="/editdata?email={{i.username}}" method="POST">
+		{% endfor %}
+		{% for i in edits %}
+		<table align="center" style="border: 2px solid yellow; border-radius:100px;">
+			<tr><td>Emp ID</td> 
+		<td><input disabled type="text" name="empid" value={{i.empid}} style="width:200px;"></td>
+	</tr>
+	<tr>
+		<td></td>
+	      <td style="color:red; text-align: center;"> {{i.name}}</td>
+
+			</tr>
+	<tr>
+	<td>Name</td>
+	      <td><input type="text" name="name" value={{i.name}} style="width:200px;"></td>
+
+			</tr>
+	<tr>
+		<td>Dept</td>
+		<td><input type="text" name="dept" value={{i.dept}} style="width:200px;"></td>
+	</tr>
+	<tr>
+		<td>Circle</td>
+		<td><input type="text" name="circle" value={{i.circle}} style="width:200px;"></td>
+	</tr>
+	<tr><td>Location</td>
+		<td><input type="text" name="location" value={{i.location}} style="width:200px;"></td>
+	</tr>
+	<tr><td>Grade</td>
+        <td><input type="text" name="grade" value={{i.grade}} style="width:200px;"></td>
+   </tr>
+	<tr><td>Date</td> 
+		<td><input type="text" name="date" value={{i.date}} style="width:200px;"></td>
+	</tr>
+	<tr><td>Certi.No.</td> 
+		<td><input type="text" name="certno" value={{i.certno}} style="width:200px;"></td>
+	</tr>
+	<tr><td>Image.</td> 
+		<td><image src="{{i.image}}"></iframe></td>
+	</tr>
+	
+		<td colspan="" align="center"><input style="margin: 10px;" type="submit" value="Update"></td>
+		</form>
+		<form action="/printfat?empid={{i.empid}}" method="POST">
+			{% endfor %}
+		<td colspan="" align="center"><input style="margin: 10px;" type="submit" value="Print"></td>
+		</form>
+	</tr>
+	</table>
+
+
+</div>
+</div>
+{% endblock %}

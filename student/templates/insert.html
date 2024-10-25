@@ -1,0 +1,97 @@
+{% extends 'menu.html' %}
+{% block insert %}
+<style type="text/css">
+	input{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+	td{
+		padding-left: 10px;
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	select{
+		border:solid red 2px;
+		margin: 5px;
+		border-radius: 10px;
+	}
+</style>
+<body>
+	<br>
+	<div class="container">
+	<button id="pdfButton">Generate PDF</button>
+      <div id="generatePdf">
+	<form action="empfatdata" method="POST" enctype="multipart/form-data">
+		<table id="generatePdf" align="center" style="border: 2px solid yellow; border-radius:50px;">
+			<tr>
+				<td>Name</td>
+				<td><input style="margin-top: 10px;" type="text" name="name"></td>
+			</tr>
+	<tr>
+		<td>Emp ID</td>
+		<td><input type="text" name="empid"></td>
+  </tr>
+	<tr>
+		<td>Dept</td>
+		<td>
+			<select name="dept">
+            <option value="TECHNICIAN">TECHNICIAN</option>
+  			<option value="ENGINEER">ENGINEER</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Circle</td>
+		<td>
+			<select name="circle">
+            <option value="MPCG">MPCG</option>
+  			<option value="GUJARAT">GUJARAT</option>
+  			<option value="UPE">UPE</option>
+			</select>
+		</td>
+	</tr>
+	<tr><td>Location</td>
+		<td>
+			<select name="location">
+            <option value="BHOPAL">BHOPAL</option>
+  			<option value="RAIPUR">RAIPUR</option>
+  			<option value="LUCKNOW">LUCKNOW</option>
+  			<option value="SURAT">SURAT</option>
+			</select>
+		</td>
+	</tr>
+	<tr><td>Grade</td>
+		<td>
+			<select name="grade">
+            <option value="GOOD">GOOD</option>
+  			<option value="VERY GOOD">VERY GOOD</option>
+  			<option value="EXCELENT">EXCELENT</option>
+			</select>
+		</td>
+   </tr>
+	<tr><td>Date</td> 
+		<td><input type="text" name="date"></td>
+	</tr>
+	<tr><td>Certificate No.</td> 
+		<td><input type="text" name="certno"></td>
+	</tr>
+	<tr><td>Image </td><td> <input style="margin-right: 5px;" type="file" accept="image/*" name="image"></td>
+	</tr>
+		<td colspan="2" align="center"><input style="margin: 10px;" type="submit" value="Upload"></td>
+	</tr>
+	</table>
+</form>
+</div>
+</div>
+<script>
+      var button = document.getElementById("pdfButton");
+      button.addEventListener("click", function () {
+         var doc = new jsPDF("p", "mm", [600, 400]);
+         var makePDF = document.querySelector("#generatePdf");
+         // fromHTML Method
+         doc.fromHTML(makePDF);
+         doc.save("output.pdf");
+      });
+   </script>
+{% endblock %}
